@@ -7,6 +7,8 @@ import 'package:pokebag/utils/assets.dart';
 import 'package:pokebag/utils/colors.dart';
 import 'package:vein/vein.dart';
 
+import '../../global_widgets/blur_background.dart';
+
 class DetailPokemonPage extends StatefulWidget {
   DetailPokemonPage({super.key, this.imageUrl});
   String? imageUrl;
@@ -39,6 +41,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
   @override
   Widget build(BuildContext context) {
     double? width = MediaQuery.of(context).size.width;
+    double? height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
@@ -50,16 +53,10 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
               style: TextStyle(
                   fontSize: 80,
                   fontWeight: FontWeight.bold,
-                  color: MainColor.inkDarker.withOpacity(.5)),
+                  color: MainColor.inkLighter.withOpacity(.4)),
             ),
           ),
-          Container(
-            width: width,
-            height: width - 40,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(width),
-                boxShadow: [BoxShadow(color: dominantColor!, blurRadius: 120)]),
-          ),
+          BlurBackground(width: width, dominantColor: dominantColor),
           Image.network(
             width: width * 2,
             height: width * 1.3,
@@ -97,6 +94,35 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                 ),
               ],
             ),
+          ),
+          Column(
+            children: [
+              (height * .5).h,
+              Text(
+                'Poke Name',
+                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 35,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: dominantColor!, width: 2)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Fire'),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

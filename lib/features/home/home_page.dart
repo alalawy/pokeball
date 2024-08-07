@@ -6,6 +6,7 @@ import 'package:pokebag/utils/colors.dart';
 import 'package:pokebag/utils/path_routes.dart';
 import 'package:vein/vein.dart';
 
+import '../../global_widgets/blur_background.dart';
 import '../../utils/assets.dart';
 import '../../utils/text_style.dart.dart';
 import 'widgets/poke_card.dart';
@@ -27,9 +28,20 @@ class HomePage extends StatelessWidget {
               style: TextStyles().title3(),
             ),
             30.h,
-            Image.asset(
-              Assets.pokeball,
-              width: MediaQuery.of(context).size.width * .5,
+            SizedBox(
+              height: 200,
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  BlurBackground(
+                      width: double.infinity,
+                      dominantColor: Colors.red.withOpacity(.4)),
+                  Image.asset(
+                    Assets.pokeball,
+                    width: MediaQuery.of(context).size.width * .5,
+                  ),
+                ],
+              ),
             ),
             20.h,
             FilledButtons(

@@ -21,7 +21,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
       vsync: this,
     );
     _controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
 
@@ -30,7 +30,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
       curve: Curves.easeInOut,
     ));
 
-    _animation = Tween<double>(begin: 0, end: -100).animate(CurvedAnimation(
+    _animation = Tween<double>(begin: 0, end: -200).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
     ));
@@ -80,9 +80,9 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
                   offset: Offset(0, _animationInit.value),
                   child: Column(
                     children: <Widget>[
-                      Icon(Icons.keyboard_arrow_up, color: Colors.white),
-                      Icon(Icons.keyboard_arrow_up, color: Colors.white),
-                      Icon(Icons.keyboard_arrow_up, color: Colors.white),
+                      Icon(Icons.keyboard_arrow_up),
+                      Icon(Icons.keyboard_arrow_up),
+                      Icon(Icons.keyboard_arrow_up),
                     ],
                   ),
                 );
@@ -118,7 +118,6 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
           bottom: 0,
           child: Text(
             'Swipe up to catch',
-            style: TextStyle(color: Colors.white),
           ),
         ),
       ],

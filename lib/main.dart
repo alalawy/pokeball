@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Color(0xFF000101),
         textTheme: TextTheme(),
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }

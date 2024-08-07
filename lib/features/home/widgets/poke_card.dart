@@ -20,8 +20,7 @@ class PokeCard extends StatefulWidget {
 }
 
 class _PokeCardState extends State<PokeCard> {
-  Color? darkVibrantColor;
-  Color? lightVibrantColor;
+  Color? dominantColor;
 
   @override
   void initState() {
@@ -36,10 +35,8 @@ class _PokeCardState extends State<PokeCard> {
     );
 
     setState(() {
-      darkVibrantColor = paletteGenerator.vibrantColor?.color ?? Colors.black;
-      lightVibrantColor =
-          paletteGenerator.lightVibrantColor?.color.withAlpha(80) ??
-              Colors.black;
+      dominantColor =
+          paletteGenerator.dominantColor?.color.withAlpha(80) ?? Colors.black;
     });
   }
 
@@ -57,17 +54,15 @@ class _PokeCardState extends State<PokeCard> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: lightVibrantColor,
-                    border: Border.all(color: darkVibrantColor!, width: 2)),
+                    color: dominantColor!.withOpacity(.5),
+                    border: Border.all(color: dominantColor!, width: 2)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
                       "Poke Name ",
                       textAlign: TextAlign.center,
-                      style: TextStyles()
-                          .regularNoneSuperBold()
-                          .copyWith(color: darkVibrantColor!),
+                      style: TextStyles().regularNoneSuperBold(),
                     ),
                     25.h
                   ],
