@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'service_locator.dart';
 import 'utils/colors.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'utils/router.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -33,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Color(0xFF000101),
         textTheme: TextTheme(),
       ),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
     );
   }
 }

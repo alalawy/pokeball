@@ -1,18 +1,34 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-class PageLogic {
-  List pokemon = [
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png',
-  ];
+import 'package:pokebag/domain/usecase/pokemon/pokemon_usecase.dart';
+import 'package:vein/vein.dart';
+
+import '../../data/models/pokemon/pokemon_model.dart';
+
+enum FeatureState { Initial, Loading, Loaded, Error }
+
+class PageLogic with Notifier {
+  final GetPokemon getPokemon;
+  FeatureState _state = FeatureState.Initial;
+  String? errorMessage;
+  PokemonModel? pokemonData;
+
+  FeatureState get state => _state;
+
+  PageLogic({required this.getPokemon});
+
+  Future<void> fetchPokemon() async {
+    _state = FeatureState.Loading;
+    refresh();
+
+    final result = await getPokemon();
+
+    result.fold(
+      (failure) {},
+      (pokemon) {
+        pokemonData = pokemon;
+        refresh();
+      },
+    );
+  }
 }
-
-var homeLogic = PageLogic();

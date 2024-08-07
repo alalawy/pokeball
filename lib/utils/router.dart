@@ -11,13 +11,13 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: PathRoutes.root,
         builder: (BuildContext context, GoRouterState state) {
-          return const HomePage();
+          return HomePage();
         }),
     GoRoute(
         path: PathRoutes.detailPokemon,
         builder: (BuildContext context, GoRouterState state) {
           return DetailPokemonPage(
-            imageUrl: state.extra!.toString(),
+            id: state.extra!.toString(),
           );
         }),
   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:vein/vein.dart';
 
 import '../../../utils/colors.dart';
@@ -8,11 +9,13 @@ import '../../../utils/text_style.dart.dart';
 class PokeCard extends StatefulWidget {
   PokeCard({
     required this.imageUrl,
+    this.name,
     this.onTap,
     super.key,
   });
 
   String? imageUrl;
+  String? name;
   VoidCallback? onTap;
 
   @override
@@ -20,7 +23,7 @@ class PokeCard extends StatefulWidget {
 }
 
 class _PokeCardState extends State<PokeCard> {
-  Color? dominantColor;
+  Color? dominantColor = Colors.black;
 
   @override
   void initState() {
@@ -44,42 +47,45 @@ class _PokeCardState extends State<PokeCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.onTap,
-      child: SizedBox(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 60),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: dominantColor!.withOpacity(.5),
-                    border: Border.all(color: dominantColor!, width: 2)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Poke Name ",
-                      textAlign: TextAlign.center,
-                      style: TextStyles().regularNoneSuperBold(),
-                    ),
-                    25.h
-                  ],
+      child: Skeletonizer(
+        enabled: widget.name == null ? true : false,
+        child: SizedBox(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: dominantColor!.withOpacity(.5),
+                      border: Border.all(color: dominantColor!, width: 2)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "${widget.name}",
+                        textAlign: TextAlign.center,
+                        style: TextStyles().regularNoneSuperBold(),
+                      ),
+                      25.h
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              top: -20,
-              left: -10,
-              child: Image.network(
-                widget.imageUrl!,
-                width: 200,
-                height: 150,
-                fit: BoxFit.fill,
-              ),
-            )
-          ],
+              Positioned(
+                top: -20,
+                left: -10,
+                child: Image.network(
+                  widget.imageUrl!,
+                  width: 200,
+                  height: 150,
+                  fit: BoxFit.fill,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
