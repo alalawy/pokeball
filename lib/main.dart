@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'service_locator.dart';
 import 'utils/colors.dart';
 
@@ -6,8 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'utils/router.dart';
 
-void main() {
+void main() async {
   setupLocator();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 

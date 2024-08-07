@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:vein/vein.dart';
 
 import '../utils/colors.dart';
+import '../utils/text_style.dart.dart';
 
 // ignore: must_be_immutable
 class DefaultTextField extends StatelessWidget {
@@ -14,7 +15,8 @@ class DefaultTextField extends StatelessWidget {
       this.obsecure = false,
       this.onEyeTap,
       this.heading,
-      this.placeholder});
+      this.placeholder,
+      this.autofocus = false});
 
   TextEditingController? controller;
   TextInputType? inputType;
@@ -23,6 +25,7 @@ class DefaultTextField extends StatelessWidget {
   VoidCallback? onEyeTap;
   Widget? heading;
   String? placeholder;
+  bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,10 @@ class DefaultTextField extends StatelessWidget {
       controller: controller,
       keyboardType: inputType,
       obscureText: obsecure,
+      autofocus: autofocus,
+      style: TextStyles()
+          .regularNoneRegular()
+          .copyWith(color: MainColor.inkLighter),
       decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
@@ -41,6 +48,7 @@ class DefaultTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(8)),
           prefixIcon: heading ?? 0.w,
           hintText: placeholder,
+          hintStyle: TextStyle(color: MainColor.inkLighter),
           suffixIcon: isPassword
               ? InkWell(
                   onTap: onEyeTap,

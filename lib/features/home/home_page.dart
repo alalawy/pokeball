@@ -52,6 +52,7 @@ class HomePage extends StatelessWidget {
             20.h,
             FilledButtons(
               text: 'PokeBag',
+              onPressed: () => context.push(PathRoutes.pokebag),
             ),
             20.h,
             Divider(

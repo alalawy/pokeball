@@ -1,7 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:pokebag/features/detail/logic.dart';
+import 'package:pokebag/service_locator.dart';
 import 'package:pokebag/utils/utils.dart';
 
 class SwipeUpPokeball extends StatefulWidget {
+  String? oggUrl;
+  String? name;
+  String? id;
+  SwipeUpPokeball({this.oggUrl, this.id, this.name});
   @override
   _SwipeUpPokeballState createState() => _SwipeUpPokeballState();
 }
@@ -13,6 +22,8 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
   late Animation<double> _animation;
   late Animation<double> _animationInit;
 
+  final player = AudioPlayer(); // Create a player
+  final logic = locator<PageLogic>();
   @override
   void initState() {
     super.initState();
@@ -46,8 +57,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _controller.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _controllerInit.forward();
+        logic.catchPokemon(context, id: widget.id, name: widget.name);
       }
     });
   }
@@ -59,8 +69,16 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
     super.dispose();
   }
 
-  void _onVerticalDragUpdate(DragUpdateDetails details) {
+  void _onVerticalDragUpdate(DragUpdateDetails details) async {
+    if (Platform.isAndroid) {
+      final duration = await player.setUrl(// Load a URL
+          widget.oggUrl!);
+    }
     if (details.primaryDelta! < -10) {
+      // Schemes: (https: | file: | asset: )
+      if (Platform.isAndroid) {
+        player.play();
+      }
       _controllerInit.stop();
       _controller.forward();
     }

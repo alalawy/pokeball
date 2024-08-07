@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:pokebag/features/detail/logic.dart';
+import 'package:pokebag/features/detail/widgets/moves_flag.dart';
 import 'package:pokebag/features/detail/widgets/swipe_pokeball.dart';
 import 'package:pokebag/service_locator.dart';
 import 'package:pokebag/utils/assets.dart';
@@ -141,6 +142,29 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                             ),
                           ),
                         ),
+                      ),
+                      20.h,
+                      Text(
+                        'Moves',
+                        style: TextStyles().title3(),
+                      ),
+                      16.h,
+                      SizedBox(
+                        height: 38,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: data?.moves?.length ?? 0,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: Center(
+                              child: MovesFlag(
+                                dominantColor: dominantColor,
+                                name: data?.moves?[index].move?.name,
+                              ),
+                            ),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -150,7 +174,11 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                   children: [
                     Container(
                       height: 150,
-                      child: SwipeUpPokeball(),
+                      child: SwipeUpPokeball(
+                        oggUrl: data?.cries?.latest,
+                        id: widget.id,
+                        name: data?.forms?.first.name,
+                      ),
                     ),
                     50.h,
                   ],
