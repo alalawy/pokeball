@@ -44,8 +44,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
     );
 
     setState(() {
-      dominantColor =
-          paletteGenerator.dominantColor?.color.withOpacity(.4) ?? Colors.black;
+      dominantColor = paletteGenerator.dominantColor?.color ?? Colors.black;
     });
   }
 
@@ -92,7 +91,22 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                   enabled: data == null ? true : false,
                   child: Column(
                     children: [
-                      (height * .5).h,
+                      (height * .48).h,
+                      SizedBox(
+                        height: 35,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: data?.types?.length ?? 0,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: MovesFlag(
+                              dominantColor: dominantColor,
+                              name: data?.types?[index].type?.name,
+                            ),
+                          ),
+                        ),
+                      ),
                       Text(
                         '${data?.forms?.first.name}',
                         style: TextStyle(
@@ -107,7 +121,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: AbilityFlag(
-                              dominantColor: dominantColor,
+                              dominantColor: dominantColor!.withOpacity(.4),
                               name: data?.abilities?[index].ability?.name,
                             ),
                           ),
@@ -129,7 +143,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Center(
                               child: MovesFlag(
-                                dominantColor: dominantColor,
+                                dominantColor: dominantColor!.withOpacity(.4),
                                 name: data?.moves?[index].move?.name,
                               ),
                             ),

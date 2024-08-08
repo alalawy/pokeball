@@ -12,9 +12,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, PokemonModel>> getPokemons() async {
+  Future<Either<Failure, PokemonModel>> getPokemons(int limit) async {
     try {
-      final remoteFeature = await remoteDataSource.getPokemon();
+      final remoteFeature = await remoteDataSource.getPokemon(limit);
       return Right(remoteFeature);
     } on ServerException {
       return Left(ServerFailure());

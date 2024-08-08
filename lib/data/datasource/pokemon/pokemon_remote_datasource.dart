@@ -6,7 +6,7 @@ import '../../../../../core/error/exceptions.dart';
 import '../../models/pokemon/pokemon_model.dart';
 
 abstract class PokemonRemoteDataSource {
-  Future<PokemonModel> getPokemon();
+  Future<PokemonModel> getPokemon(int limit);
 }
 
 class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
@@ -15,9 +15,9 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   PokemonRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<PokemonModel> getPokemon() async {
+  Future<PokemonModel> getPokemon(int limit) async {
     final response = await client.get(
-      Uri.parse('${Utils.baseUrl}/pokemon'),
+      Uri.parse('${Utils.baseUrl}/pokemon?offset=0&limit=$limit'),
       headers: {'Content-Type': 'application/json'},
     );
 

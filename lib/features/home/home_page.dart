@@ -7,6 +7,7 @@ import 'package:pokebag/features/home/logic.dart';
 import 'package:pokebag/service_locator.dart';
 import 'package:pokebag/utils/colors.dart';
 import 'package:pokebag/utils/path_routes.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:vein/vein.dart';
 
 import '../../global_widgets/blur_background.dart';
@@ -68,26 +69,38 @@ class HomePage extends StatelessWidget {
               child: VeinBuilder(
                   logic: logic,
                   builder: (context, _child) {
-                    return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 16,
-                        ),
-                        padding: EdgeInsets.all(8.0), // padding around the grid
-                        itemCount: logic.pokemonData?.results?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          var _data = logic.pokemonData?.results?[index];
-                          List<String>? idDatas = _data?.url?.split('/');
-
-                          return PokeCard(
-                            imageUrl:
-                                '${Utils.imageUrl}${idDatas![idDatas.length - 2]}.png',
-                            onTap: () => context.push(PathRoutes.detailPokemon,
-                                extra: idDatas[idDatas.length - 2]),
-                            name: _data?.name,
-                          );
-                        });
+                    return SmartRefresher(
+                      enablePullDown: true,
+                      enablePullUp: true,
+                      onRefresh: () => logic.onRefresh(),
+                      onLoading: () => logic.onLoading(),
+                      controller: logic.refreshController,
+                      child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 16,
+                          ),
+                          physics: BouncingScrollPhysics(),
+                          padding:
+                              EdgeInsets.all(8.0), // padding around the grid
+                          itemCount: logic.pokemonData?.results?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            var _data = logic.pokemonData?.results?[index];
+                            List<String>? idDatas = _data?.url?.split('/');
+                            return logic.loading.value
+                                ? Center(child: CircularProgressIndicator())
+                                : PokeCard(
+                                    imageUrl:
+                                        '${Utils.imageUrl}${idDatas![idDatas.length - 2]}.png',
+                                    onTap: () => context.push(
+                                        PathRoutes.detailPokemon,
+                                        extra: idDatas[idDatas.length - 2]),
+                                    name: _data?.name,
+                                  );
+                          }),
+                    );
                   }),
             )
           ],

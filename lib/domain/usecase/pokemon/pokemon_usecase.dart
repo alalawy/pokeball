@@ -9,7 +9,7 @@ class GetPokemon {
 
   GetPokemon(this.repository);
 
-  Future<Either<Failure, PokemonModel>> call() async {
-    return await repository.getPokemons();
+  Future<Either<Failure, PokemonModel>> call(int limit) async {
+    return await repository.getPokemons(limit);
   }
 }
