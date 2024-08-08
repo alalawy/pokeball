@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -8,6 +6,7 @@ import 'package:vein/vein.dart';
 
 import '../../../utils/utils.dart';
 
+// ignore: must_be_immutable
 class BagCard extends StatefulWidget {
   BagCard({
     required this.pokeBagModel,
@@ -89,7 +88,7 @@ class _BagCardState extends State<BagCard> {
                   height: 200,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(200),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(blurRadius: 100, color: MainColor.skyLight)
                       ]),
                 ),

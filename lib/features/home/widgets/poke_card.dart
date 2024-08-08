@@ -3,9 +3,9 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:vein/vein.dart';
 
-import '../../../utils/colors.dart';
 import '../../../utils/text_style.dart.dart';
 
+// ignore: must_be_immutable
 class PokeCard extends StatefulWidget {
   PokeCard({
     required this.imageUrl,

@@ -1,18 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokebag/global_widgets/buttons.dart';
 import 'package:pokebag/features/home/logic.dart';
 import 'package:pokebag/service_locator.dart';
-import 'package:pokebag/utils/colors.dart';
 import 'package:pokebag/utils/path_routes.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:vein/vein.dart';
 
 import '../../global_widgets/blur_background.dart';
-import '../../utils/assets.dart';
-import '../../utils/text_style.dart.dart';
 import '../../utils/utils.dart';
 import 'widgets/poke_card.dart';
 
@@ -28,7 +23,7 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            Row(),
+            const Row(),
             50.h,
             Text(
               "Battleground",
@@ -56,7 +51,7 @@ class HomePage extends StatelessWidget {
               onPressed: () => context.push(PathRoutes.pokebag),
             ),
             20.h,
-            Divider(
+            const Divider(
               thickness: 2,
             ),
             10.h,
@@ -68,7 +63,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: VeinBuilder(
                   logic: logic,
-                  builder: (context, _child) {
+                  builder: (context, _) {
                     return SmartRefresher(
                       enablePullDown: true,
                       enablePullUp: true,
@@ -77,27 +72,28 @@ class HomePage extends StatelessWidget {
                       controller: logic.refreshController,
                       child: GridView.builder(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 16,
                             crossAxisSpacing: 16,
                           ),
-                          physics: BouncingScrollPhysics(),
-                          padding:
-                              EdgeInsets.all(8.0), // padding around the grid
+                          physics: const BouncingScrollPhysics(),
+                          padding: const EdgeInsets.all(
+                              8.0), // padding around the grid
                           itemCount: logic.pokemonData?.results?.length ?? 0,
                           itemBuilder: (context, index) {
-                            var _data = logic.pokemonData?.results?[index];
-                            List<String>? idDatas = _data?.url?.split('/');
+                            var data = logic.pokemonData?.results?[index];
+                            List<String>? idDatas = data?.url?.split('/');
                             return logic.loading.value
-                                ? Center(child: CircularProgressIndicator())
+                                ? const Center(
+                                    child: CircularProgressIndicator())
                                 : PokeCard(
                                     imageUrl:
                                         '${Utils.imageUrl}${idDatas![idDatas.length - 2]}.png',
                                     onTap: () => context.push(
                                         PathRoutes.detailPokemon,
                                         extra: idDatas[idDatas.length - 2]),
-                                    name: _data?.name,
+                                    name: data?.name,
                                   );
                           }),
                     );

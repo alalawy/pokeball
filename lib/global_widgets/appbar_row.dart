@@ -26,7 +26,7 @@ class AppBarRow extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: MainColor.inkLighter,
                     borderRadius: BorderRadius.circular(8)),
-                child: HugeIcon(
+                child: const HugeIcon(
                     icon: HugeIcons.strokeRoundedArrowLeft01,
                     color: Colors.white),
               )),
@@ -35,7 +35,7 @@ class AppBarRow extends StatelessWidget {
             child: Container(
               width: 40,
               height: 40,
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   color: MainColor.skyLight,
                   borderRadius: BorderRadius.circular(8)),

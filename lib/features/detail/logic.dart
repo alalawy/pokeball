@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -16,6 +15,7 @@ import 'package:vein/vein.dart';
 
 import '../../utils/text_style.dart.dart';
 
+// ignore: constant_identifier_names
 enum FeatureState { Initial, Loading, Loaded, Error }
 
 class PageLogic with Notifier {
@@ -87,7 +87,7 @@ class PageLogic with Notifier {
                         16.h,
                         DefaultTextField(
                           controller: nameController,
-                          heading: HugeIcon(
+                          heading: const HugeIcon(
                             icon: HugeIcons.strokeRoundedPokeball,
                             color: MainColor.inkDarker,
                           ),

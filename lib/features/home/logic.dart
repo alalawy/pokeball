@@ -1,12 +1,10 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:pokebag/domain/usecase/pokemon/pokemon_usecase.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:vein/vein.dart';
 
 import '../../data/models/pokemon/pokemon_model.dart';
 
+// ignore: constant_identifier_names
 enum FeatureState { Initial, Loading, Loaded, Error }
 
 class PageLogic with Notifier {
@@ -41,7 +39,7 @@ class PageLogic with Notifier {
 
   void onRefresh() async {
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     reload();
     refreshController.refreshCompleted();
@@ -49,7 +47,7 @@ class PageLogic with Notifier {
 
   void onLoading() async {
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use loadFailed(),if no data return,use LoadNodata()
     loadMore();
     refreshController.loadComplete();

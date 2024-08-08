@@ -24,7 +24,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: PathRoutes.pokebag,
         builder: (BuildContext context, GoRouterState state) {
-          return Pokebag();
+          return const Pokebag();
         }),
   ],
 );

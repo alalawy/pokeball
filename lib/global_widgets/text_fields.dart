@@ -48,7 +48,7 @@ class DefaultTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(8)),
           prefixIcon: heading ?? 0.w,
           hintText: placeholder,
-          hintStyle: TextStyle(color: MainColor.inkLighter),
+          hintStyle: const TextStyle(color: MainColor.inkLighter),
           suffixIcon: isPassword
               ? InkWell(
                   onTap: onEyeTap,

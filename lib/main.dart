@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'service_locator.dart';
-import 'utils/colors.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 
 import 'utils/router.dart';
 
@@ -29,13 +26,13 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-        textTheme: TextTheme(),
+        textTheme: const TextTheme(),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Color(0xFF000101),
-        textTheme: TextTheme(),
+        scaffoldBackgroundColor: const Color(0xFF000101),
+        textTheme: const TextTheme(),
       ),
       themeMode: ThemeMode.dark,
     );

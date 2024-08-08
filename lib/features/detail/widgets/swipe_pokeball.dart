@@ -6,12 +6,14 @@ import 'package:pokebag/features/detail/logic.dart';
 import 'package:pokebag/service_locator.dart';
 import 'package:pokebag/utils/utils.dart';
 
+// ignore: must_be_immutable
 class SwipeUpPokeball extends StatefulWidget {
   String? oggUrl;
   String? name;
   String? id;
-  SwipeUpPokeball({this.oggUrl, this.id, this.name});
+  SwipeUpPokeball({super.key, this.oggUrl, this.id, this.name});
   @override
+  // ignore: library_private_types_in_public_api
   _SwipeUpPokeballState createState() => _SwipeUpPokeballState();
 }
 
@@ -71,7 +73,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
 
   void _onVerticalDragUpdate(DragUpdateDetails details) async {
     if (Platform.isAndroid) {
-      final duration = await player.setUrl(// Load a URL
+      await player.setUrl(// Load a URL
           widget.oggUrl!);
     }
     if (details.primaryDelta! < -10) {
@@ -96,7 +98,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
               builder: (context, child) {
                 return Transform.translate(
                   offset: Offset(0, _animationInit.value),
-                  child: Column(
+                  child: const Column(
                     children: <Widget>[
                       Icon(Icons.keyboard_arrow_up),
                       Icon(Icons.keyboard_arrow_up),
@@ -121,7 +123,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
               child: Container(
                 width: 50,
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: AssetImage(Assets.pokeball),
@@ -132,7 +134,7 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
             ),
           ),
         ),
-        Positioned(
+        const Positioned(
           bottom: 0,
           child: Text(
             'Swipe up to catch',

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:pokebag/features/detail/logic.dart';
 import 'package:pokebag/features/detail/widgets/moves_flag.dart';
 import 'package:pokebag/features/detail/widgets/swipe_pokeball.dart';
 import 'package:pokebag/service_locator.dart';
-import 'package:pokebag/utils/assets.dart';
-import 'package:pokebag/utils/colors.dart';
 import 'package:pokebag/utils/utils.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:vein/vein.dart';
@@ -16,6 +12,7 @@ import '../../global_widgets/appbar_row.dart';
 import '../../global_widgets/blur_background.dart';
 import 'widgets/ability_flag.dart';
 
+// ignore: must_be_immutable
 class DetailPokemonPage extends StatefulWidget {
   DetailPokemonPage({super.key, this.id});
   String? id;
@@ -55,7 +52,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
     return Scaffold(
       body: VeinBuilder(
           logic: logic,
-          builder: (context, _widget) {
+          builder: (context, _) {
             var data = logic.pokemonData;
             return Stack(
               alignment: Alignment.topCenter,
@@ -86,7 +83,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                AppBarRow(),
+                const AppBarRow(),
                 Skeletonizer(
                   enabled: data == null ? true : false,
                   child: Column(
@@ -109,7 +106,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                       ),
                       Text(
                         '${data?.forms?.first.name}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 35, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -156,7 +153,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
+                    SizedBox(
                       height: 150,
                       child: SwipeUpPokeball(
                         oggUrl: data?.cries?.latest,

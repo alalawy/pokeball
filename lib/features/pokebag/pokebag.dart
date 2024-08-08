@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:pokebag/features/pokebag/logic.dart';
 import 'package:pokebag/global_widgets/appbar_row.dart';
-import 'package:pokebag/utils/colors.dart';
 import 'package:pokebag/utils/utils.dart';
 import 'package:vein/vein.dart';
 
-import '../../utils/assets.dart';
 import 'widgets/bag_card.dart';
 
 class Pokebag extends StatelessWidget {
@@ -49,7 +44,7 @@ class Pokebag extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
-                AppBarRow(),
+                const AppBarRow(),
                 Padding(
                   padding: const EdgeInsets.only(top: 150, left: 16),
                   child: Column(
@@ -73,7 +68,7 @@ class Pokebag extends StatelessWidget {
                           )
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(
                         "${pokeBagLogic.pokeBagModels.length} Pokémon\nin Your\nPokebag",
                         style: TextStyles().regularNormalRegular(),
