@@ -12,6 +12,7 @@ import 'package:pokebag/utils/utils.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:vein/vein.dart';
 
+import '../../global_widgets/appbar_row.dart';
 import '../../global_widgets/blur_background.dart';
 import 'widgets/ability_flag.dart';
 
@@ -86,38 +87,7 @@ class _DetailPokemonPageState extends State<DetailPokemonPage> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 60, 16, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                          onTap: () => context.pop(),
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: MainColor.inkLighter,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: HugeIcon(
-                                icon: HugeIcons.strokeRoundedArrowLeft01,
-                                color: Colors.white),
-                          )),
-                      InkWell(
-                        onTap: () => context.pop(),
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: MainColor.skyLight,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Image.asset(Assets.pokeball),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                AppBarRow(),
                 Skeletonizer(
                   enabled: data == null ? true : false,
                   child: Column(

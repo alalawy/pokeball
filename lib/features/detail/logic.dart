@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:pokebag/data/models/detail_pokemon/detail_pokemon_model.dart';
 import 'package:pokebag/data/models/pokebag/pokebag_model.dart';
@@ -46,7 +47,13 @@ class PageLogic with Notifier {
     log(pokemonData.toString());
   }
 
-  void saveToPokebag(String? id, String? name) {
+  void loadPokeBag() {
+    pokeBagModel = pokeBagModelFromJson(box.read('pokebag'));
+    refresh();
+  }
+
+  Future<void> saveToPokebag(String? id, String? name) async {
+    loadPokeBag();
     pokeBagModel
         .add(PokeBagModel(realName: name, id: id, name: nameController!.text));
     refresh();
@@ -90,7 +97,9 @@ class PageLogic with Notifier {
                         8.h,
                         FilledButtons(
                             text: 'Save',
-                            onPressed: () => saveToPokebag(id, name))
+                            onPressed: () => saveToPokebag(id, name).then(
+                                  (value) => context.pop(),
+                                ))
                       ],
                     ),
                   ),
