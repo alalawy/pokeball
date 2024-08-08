@@ -48,7 +48,9 @@ class PageLogic with Notifier {
   }
 
   void loadPokeBag() {
-    pokeBagModel = pokeBagModelFromJson(box.read('pokebag'));
+    pokeBagModel = box.read('pokebag') == null
+        ? []
+        : pokeBagModelFromJson(box.read('pokebag'));
     refresh();
   }
 

@@ -72,17 +72,17 @@ class _SwipeUpPokeballState extends State<SwipeUpPokeball>
   }
 
   void _onVerticalDragUpdate(DragUpdateDetails details) async {
-    if (Platform.isAndroid) {
-      await player.setUrl(// Load a URL
-          widget.oggUrl!);
-    }
     if (details.primaryDelta! < -10) {
       // Schemes: (https: | file: | asset: )
-      if (Platform.isAndroid) {
-        player.play();
-      }
+
       _controllerInit.stop();
       _controller.forward();
+
+      if (Platform.isAndroid) {
+        await player.setUrl(// Load a URL
+            widget.oggUrl!);
+        player.play();
+      }
     }
   }
 
